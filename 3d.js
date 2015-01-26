@@ -1,4 +1,4 @@
-// CSS 3D rendering engine
+// MeowKillCSS 3D rendering engine
 var meow3d = module.render3d = function(opts) {
 	'use strict';
 
@@ -113,7 +113,23 @@ var meow3d = module.render3d = function(opts) {
 		return t;
 	}
 
-	//
-	// Still more to code
-	//
+	// Applying CSS transform for camera and set prespective
+	function updateCamera(camera) {
+	var presp = 0.5 / Math.tan(camera.fov * π / 360) * height3d;
+	var xTransform = xCameraTransform(camera, presp);
+	xCamera.style.WebkitTransform = xTransform;
+	xCamera.style.MozTransform = xTransform;
+	xCamera.style.oTransform = xTransform;
+	xCamera.style.msTransform = xTransform;
+	xCamera.style.xTransform = xTransform;
+	if(opts.presp !== false) {
+		var element = opts.presp || x3d.presp || xCanvas;
+		var p = presp + 'px';
+		element.style.WebkitPresp = p;
+		element.style.MozPresp = p;
+		element.style.oPresp = p;
+		element.style.msPresp = p;
+		element.style.tPresp = p;
+	} }
+	meow.updateCamera = updateCamera;
 };
