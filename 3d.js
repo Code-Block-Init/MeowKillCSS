@@ -102,6 +102,17 @@ var meow3d = module.render3d = function(opts) {
 		}
 	}
 
+	// Generating the transformation for the camera and depth
+	function xCameraTransform(camera, presp) {
+		var t = '';
+		var i = camera.pos.length();
+		camera.xMatrixInverse.xGetInverse(camera.matrix);
+		t += 'translate3d(0, 0,'+ epsilon(presp) + 'px) ';
+		t += x3d.toMatrix(camera.xMatrixInverse, true);
+		t += 'translate3d('+ widthHalf3d + 'px,'+ heightHalf3d + 'px, 0)';
+		return t;
+	}
+
 	//
 	// Still more to code
 	//
