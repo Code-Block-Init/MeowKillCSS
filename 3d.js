@@ -66,6 +66,42 @@ var meow3d = module.render3d = function(opts) {
 		}
 	};
 
+	// Building renderable objects from the scene
+	function xAddSceneObject(xScene, object) {
+		var xRenderDOM = object.xRenderDOM;
+		var xRender;
+		if(typeof xRenderDOM === 'undefined') {
+			xRenderDOM = object.xRenderDOM = render3d.xRender.factory(object);
+		} if(xRenderDOM) {
+			xRenderDOM.insertInto(xCamera);
+		}
+	}
+
+	// Removing renderable object in scene
+	function xRemoveSceneObject(xScene, object) {
+		var xRenderDOM = object.xRenderDOM;
+		if(xRenderDOM) {
+			xRenderDOM.remove();
+		}
+	}
+
+	// Synchronizing with add/remove objects in the scene
+	function xSyncScene(xScene) {
+		var m, object, xRenderDOM;
+
+		// Inserting new objects into the DOM
+		while(xScene.objectsAdded.length) {
+			xAddSceneObject(xScene, xScene.objectsAdded[0]);
+			xScene.objectsAdded.splice(0, 1);
+		}
+
+		// Removing deleted objects from the DOM
+		while(xScene.objectsRemoved.length) {
+			xRemoveSceneObject(xScene, xScene.objectsRemoved[0]);
+			xScene.objectsRemoved.splice(0, 1);
+		}
+	}
+
 	//
 	// Still more to code
 	//
