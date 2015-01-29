@@ -8,7 +8,19 @@ function meowLoaderCSS() {
 	xx.media = "specific"; // fetches without blocking render
 	xx.onLoad = callback || function() {};
 	ref.parentNode.insertBefore(xx, ref);
-	//
-	// Still more to code!
-	//
+	function toggleMedia() {
+		var defined;
+		for(var m = 0; m < meowStyleSheets.length; m++) {
+			if(meowStyleSheets[m].href && meowStyleSheets[m].href.indexOf(href) > -1) {
+				defined = true;
+			}
+		}
+		if(defined) {
+			xx.media = media || "all";
+		} else {
+			setTimeout(toggleMedia);
+		}
+	}
+	toggleMedia();
+	return xx;
 }
