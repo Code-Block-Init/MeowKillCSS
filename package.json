@@ -1,6 +1,6 @@
 {
   "name": "MeowKillCSS-loader",
-  "version": "v0.0.0",
+  "version": "v0.0.1",
   "description": "For eliminating CSS redundancy through fast loading",
   "license": "GNU GPL v2.0",
   "repository": "dragonwolverines/MeowKillCSS",
