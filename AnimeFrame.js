@@ -1,6 +1,9 @@
 var AnimeFrame = function() {
+  
 	// Animation Frame
+	
 	'use strict';
+	
 	if(!window.AnimeFrame) {
 		window.AnimeFrame = function() {
 			return window.webkitAnimeFrame ||
